@@ -1,0 +1,8 @@
+avr-gcc -c -g -mmcu=atmel328p led.c
+avr-as atmega328p.S
+update binutils (2.25 latest version as of 5/20/15)
+./configure --target=avr --enable-languages="c c++" --prefix=/usr/local/avr
+	install everything into /usr/local/avr
+
+
+
