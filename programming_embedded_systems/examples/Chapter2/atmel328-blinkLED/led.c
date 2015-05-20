@@ -36,12 +36,12 @@ toggleLed(unsigned char ledMask)
     
 
     asm (
-        
-        "ldi r24, ledMask \n\t"	/* Set PINBX as output	*/
-        "out 0x24, r24 \n\t"
-        "ldi r25, PORTB \n\t"   /* Read contents of port B	*/
-        "com r25 \n\t"			/* Toggle the requested bits.	*/
-		"out 0x25, r25 \n\t"	/* Write the new register contents.*/
+      
+    	"ldi r24, ledMask \n\t"	/* Set PINBX as output	*/
+    	"out 0x24, r24 \n\t"
+    	"ldi r25, PORTB \n\t"   /* Read contents of port B	*/
+    	"com r25 \n\t"			/* Toggle the requested bits.	*/
+	 	"out 0x25, r25 \n\t"	/* Write the new register contents.*/
     );
 
 }   /* toggleLed() */
