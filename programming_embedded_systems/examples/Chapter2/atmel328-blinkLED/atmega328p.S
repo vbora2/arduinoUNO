@@ -110,7 +110,7 @@
 	.section	.debug_str
 .Lproducer:
 	.ascii		"avr-libc "
-	.asciz		__AVR_LIBC_VERSION_STRING__
+	.asciz		"__AVR_LIBC_VERSION_STRING__"
 	.section	.debug_info
 	.long		.Lproducer
 
