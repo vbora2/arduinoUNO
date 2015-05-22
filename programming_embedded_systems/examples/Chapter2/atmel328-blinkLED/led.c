@@ -15,6 +15,7 @@
  **********************************************************************/
 
 #include "led.h"
+#include <avr/io.h>
 
 
 /**********************************************************************
@@ -31,8 +32,8 @@
 void 
 toggleLed(unsigned char ledMask)
 {
-    #define PORTB 0x25	/* The address PORTB	*/
-    #define DDRB 0x24	/* The address DDRB		*/		
+    //#define PORTB 0x25	/* The address PORTB	*/
+    //#define DDRB 0x24	/* The address DDRB		*/		
     
 
     asm (

@@ -1,8 +1,9 @@
-avr-gcc -c -g -mmcu=atmega328p led.c
+avr-gcc -c -g -mmcu=atmega328p led.c blink.c
 avr-as atmega328p.S
 update binutils (2.25 latest version as of 5/20/15)
 ./configure --target=avr --enable-languages="c c++" --prefix=/usr/local/avr
 	install everything into /usr/local/avr
 
+PATH="/usr/p4v-2013.1.611503/bin:/usr/local/sbin:/usr/local/avr/bin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games"
 
 
