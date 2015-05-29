@@ -1,9 +1,19 @@
-avr-gcc -c -g -mmcu=atmega328p led.c blink.c
-avr-as atmega328p.S
+[avr-gcc -c -g -mmcu=atmega328p led.c blink.c
+avr-as -O atmega328p.o atmega328p.S 
+avr-ld -O blink.exe atmega328p.o led.o blink.o]
+
+avr-gcc -mmcu=atmega328p -Wl,-Map,blink.map led.c blink.c -o blink.elf blink.o 
+
+avr-objcopy -j .text -j .data --set-start 0xC00 -O ihex blink.exe blink.hex
+(The -j option indicates that we want the information from the .text and .data segment extracted)
+
 update binutils (2.25 latest version as of 5/20/15)
 ./configure --target=avr --enable-languages="c c++" --prefix=/usr/local/avr
 	install everything into /usr/local/avr
 
-PATH="/usr/p4v-2013.1.611503/bin:/usr/local/sbin:/usr/local/avr/bin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games"
+PATH="/opt/rtems-4.10/bin:/usr/p4v-2013.1.611503/bin:/usr/local/sbin:/usr/local/avr/bin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games"
 
-
+documentation:
+http://git-scm.com/book/en/v2/Getting-Started-About-Version-Control
+http://www.nongnu.org/avr-libc/user-manual/install_tools.html#install_avr_binutils
+http://playground.arduino.cc/FreeBSD/CLI
