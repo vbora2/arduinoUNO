@@ -13,6 +13,10 @@ update binutils (2.25 latest version as of 5/20/15)
 
 PATH="/opt/rtems-4.10/bin:/usr/p4v-2013.1.611503/bin:/usr/local/sbin:/usr/local/avr/bin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games"
 
+git status
+git commit -a -m "instructions changes"
+git push origin
+
 documentation:
 http://git-scm.com/book/en/v2/Getting-Started-About-Version-Control
 http://www.nongnu.org/avr-libc/user-manual/install_tools.html#install_avr_binutils
