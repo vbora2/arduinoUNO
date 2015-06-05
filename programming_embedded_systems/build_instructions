@@ -1,11 +1,14 @@
 [avr-gcc -c -g -mmcu=atmega328p led.c blink.c
 avr-as -O atmega328p.o atmega328p.S 
-avr-ld -O blink.exe atmega328p.o led.o blink.o]
+avr-ld -O blink.exe atmega328p.o led.o blink.o
 
-avr-gcc -mmcu=atmega328p -Wl,-Map,blink.map led.c blink.c -o blink.elf blink.o 
+avr-gcc -DF_CPU=20000000UL -mmcu=atmega328p -Wl,-Map,blink.map blink.c -o blink.o 
 
-avr-objcopy -j .text -j .data --set-start 0xC00 -O ihex blink.exe blink.hex
-(The -j option indicates that we want the information from the .text and .data segment extracted)
+avr-objcopy -j .text -j .data --set-start 0xC00 -O ihex blink.o blink.hex
+
+	(The -j option indicates that we want the information from the .text and .data segment extracted)
+
+avrdude -V -F -c arduino -p m328p 19200 -P COM21 -U flash:w:blink.hex
 
 update binutils (2.25 latest version as of 5/20/15)
 ./configure --target=avr --enable-languages="c c++" --prefix=/usr/local/avr
