@@ -2,7 +2,10 @@
 avr-as -O atmega328p.o atmega328p.S 
 avr-ld -O blink.exe atmega328p.o led.o blink.o
 
-avr-gcc -DF_CPU=20000000UL -mmcu=atmega328p -Wl,-Map,blink.map blink.c -o blink.o 
+1) avr-gcc -DF_CPU=20000000UL -mmcu=atmega328p -Wl,-Map,blink.map blink.c -o blink.o 
+2)avr-gcc -g -Os -mmcu=atmega328p -c blink.c
+	avr-gcc -g -mmcu=atmega328p -o blink.elf blink.o
+	avr-objdump -h -S blink.elf > blink.asm
 
 avr-objcopy -j .text -j .data --set-start 0xC00 -O ihex blink.o blink.hex
 
@@ -20,7 +23,63 @@ git status
 git commit -a -m "instructions changes"
 git push origin
 
-documentation:
+documentation:    
 http://git-scm.com/book/en/v2/Getting-Started-About-Version-Control
 http://www.nongnu.org/avr-libc/user-manual/install_tools.html#install_avr_binutils
 http://playground.arduino.cc/FreeBSD/CLI
+
+********Arduino Uno board header **********
+***Memory: all are linear and regular memory maps
+
+Program Memory Map (16 bits - 32K total)
+		Base address		Size		Description
+		------------		----		-----------
+		0x0000							Application Flash Section
+										Boot Flash Section
+					
+SRAM Data Memory Map (8 bits)
+		Base address	Size		Description
+		------------	----		-----------
+		0x0000			32			32 Registers
+		0x0020			64			64 I/O Registers
+		0x0060			160			160 Ext I/O Reg
+		0x0100			2048		Internal SRAM
+		
+EEPROM Data Memory Map (8 bits)
+		Base address	Size		Description
+		------------	----		-----------
+		0x0000			1K			EEPROM
+		
+I/O Memory Map (8 bits)
+		Base address	Size		Description
+		------------	----		-----------
+		0x0000			256			I/O space (all I/Os and peripherals)
+		
+Interrupt Map
+		Address	Labels	Code	Comments				
+		0x0000	jmp	RESET	Reset Handler				
+		0x0002	jmp	EXT_INT0	IRQ0 Handler				
+		0x0004	jmp	EXT_INT1	IRQ1 Handler				
+		0x0006	jmp	PCINT0	PCINT0 Handler				
+		0x0008	jmp	PCINT1	PCINT1	Handler			
+		0x000A	jmp	PCINT2	PCINT2	Handler			
+		0x000C	jmp	WDT	Watchdog	Timer	Handler		
+		0x000E	jmp	TIM2_COMPA	Timer2	Compare	A	Handler	
+		0x0010	jmp	TIM2_COMPB	Timer2	Compare	B	Handler	
+		0x0012	jmp	TIM2_OVF	Timer2	Overflow	Handler		
+		0x0014	jmp	TIM1_CAPT	Timer1	Capture	Handler		
+		0x0016	jmp	TIM1_COMPA	Timer1	Compare	A	Handler	
+		0x0018	jmp	TIM1_COMPB	Timer1	Compare	B	Handler	
+		0x001A	jmp	TIM1_OVF	Timer1	Overflow	Handler		
+		0x001C	jmp	TIM0_COMPA	Timer0	Compare	A	Handler	
+		0x001E	jmp	TIM0_COMPB	Timer0	Compare	B	Handler	
+		0x0020	jmp	TIM0_OVF	Timer0	Overflow	Handler		
+		0x0022	jmp	SPI_STC	SPI	Transfer	Complete	Handler	
+		0x0024	jmp	USART_RXC	USART		RX	Complete	Handler
+		0x0026	jmp	USART_UDRE	USART		UDR	Empty	Handler
+		0x0028	jmp	USART_TXC	USART		TX	Complete	Handler
+		0x002A	jmp	ADC	ADC	Conversion	Complete	Handler	
+		0x002C	jmp	EE_RDY	EEPROM	Ready	Handler		
+		0x002E	jmp	ANA_COMP	Analog	Comparator	Handler		
+		0x0030	jmp	TWI	2-wire	Serial	Interface	Handler	
+		0x0032	jmp	SPM_RDY	Store Program Memory Ready Handler				
