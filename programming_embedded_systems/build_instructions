@@ -54,6 +54,7 @@ I/O Memory Map (8 bits)
 		Base address	Size		Description
 		------------	----		-----------
 		0x0000			256			I/O space (all I/Os and peripherals)
+        0x0060          1           WDTCSR - Watchdog Timer Control Register
 		
 Interrupt Map
 		Address	Labels	Code	Comments				
